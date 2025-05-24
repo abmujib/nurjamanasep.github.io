@@ -1,29 +1,60 @@
-* {
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  color: #333;
 }
 
-nav {
-  padding: 10px 20px;
-  background-color: #5eecee;
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-ul {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
-  
-li {
-  list-style-type: none;
+header {
+  text-align: center;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  font-weight: 800;
-  background: salmon;
-  padding: 10px;
-  border-radius: 5px;
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #333;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-style: italic;
+  color: #777;
+}
+
+.quote {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #eee;
+  border-left: 5px solid #555;
+  font-style: italic;
+}
+
+h2 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+.skills ul {
+  list-style: square;
+  padding-left: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #999;
 }
