@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>You & Me</title>
+  <title>You and me</title>
   <style>
     body {
       margin: 0;
@@ -47,8 +47,23 @@
       display: block;
     }
 
-    audio {
-      display: none;
+    button {
+      margin-top: 20px;
+      background-color: white;
+      color: #e91e63;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f8bbd0;
+      color: white;
     }
 
     @keyframes fadeIn {
@@ -104,32 +119,34 @@
     @media (max-width: 600px) {
       h1 { font-size: 2.2em; }
       .love-message { font-size: 1em; }
+      button { font-size: 1em; padding: 12px 24px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Musik autoplay dengan muted -->
-  <audio id="romanticMusic" autoplay muted loop>
-    <source src="https://steksa.net/musik-romantis.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
   <div class="hearts"></div>
 
-  <h1>You & Me</h1>
+  <h1>You and me</h1>
 
   <div class="photo">
-    <img src="foto-romantis.jpg" alt="Foto Asep dan Zahra" />
+    <img src="foto-romantis.jpg" alt="Foto Asep dan Jahra" />
   </div>
 
   <div class="love-message">
     <p>
       Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br><br>
       Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku, dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
-      Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
+      Aku mencintaimu Jahra, hari ini, esok, dan selamanya.
     </p>
   </div>
+
+  <button onclick="playMusic()">UNTUK MU</button>
+
+  <audio id="romanticMusic">
+    <source src="https://steksa.net/musik-romantis.mp3" type="audio/mpeg">
+    Browsermu tidak mendukung audio.
+  </audio>
 
   <script>
     // Animasi hati
@@ -142,12 +159,10 @@
       document.querySelector('.hearts').appendChild(heart);
     }
 
-    // Trigger untuk unmute audio saat klik pertama
-    const music = document.getElementById("romanticMusic");
-    window.addEventListener('click', function () {
-      music.muted = false;
-      music.play();
-    }, { once: true });
+    function playMusic() {
+      const audio = document.getElementById("romanticMusic");
+      audio.play();
+    }
   </script>
 
 </body>
