@@ -11,59 +11,105 @@
       background: linear-gradient(to bottom right, #ffb6c1, #dda0dd);
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      text-align: center;
       overflow-x: hidden;
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       position: relative;
+      text-align: center;
+    }
+
+    /* Container utama berisi konten yang nanti di-blur */
+    .content-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 700px;
+      z-index: 1;
     }
 
     h1 {
       font-size: 3em;
-      animation: fadeIn 2s ease-in-out;
       margin: 0 0 20px;
-    }
-
-    .love-message {
-      margin: 20px auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 600px;
-      background-color: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      font-size: 1.2em;
-      animation: fadeIn 4s ease-in-out;
-      backdrop-filter: blur(5px);
-      z-index: 10;
-      position: relative;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .photo {
-      margin: 20px auto;
-      width: 90%;
+      margin: 0 auto 20px;
       max-width: 400px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 10;
-      position: relative;
     }
 
     .photo img {
       width: 100%;
       display: block;
+      border-radius: 20px;
     }
 
+    .love-message {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 1.2em;
+      animation: fadeIn 4s ease-in-out;
+      backdrop-filter: blur(5px);
+      color: white;
+      user-select: none;
+    }
+
+    /* Blur overlay yang menutupi seluruh konten .content-wrapper */
+    .blur-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 182, 193, 0.3);
+      z-index: 10;
+      transition: opacity 0.5s ease;
+    }
+
+    .blur-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Tombol play fixed di tengah layar di atas blur */
+    .play-button {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      color: #e91e63;
+      border: none;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 1.4em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      z-index: 20;
+      user-select: none;
+    }
+
+    .play-button:hover {
+      background-color: #f8bbd0;
+      color: white;
+    }
+
+    /* Animasi hati di belakang */
     .hearts {
       position: fixed;
       width: 100%;
       height: 100%;
       top: 0; left: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
     }
 
     .heart {
@@ -108,46 +154,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .blur-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 182, 193, 0.3);
-      z-index: 5;
-      transition: opacity 0.5s ease;
-    }
-
-    .blur-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Tombol di tengah layar di atas blur */
-    .play-button {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      color: #e91e63;
-      border: none;
-      padding: 18px 40px;
-      border-radius: 50px;
-      font-size: 1.4em;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      z-index: 10;
-    }
-
-    .play-button:hover {
-      background-color: #f8bbd0;
-      color: white;
-    }
-
     @media (max-width: 600px) {
       h1 { font-size: 2.2em; }
       .love-message { font-size: 1em; }
@@ -161,20 +167,23 @@
 <body>
 
   <div class="hearts"></div>
-  <div class="blur-overlay" id="blurOverlay"></div>
 
-  <h1>You & Me</h1>
+  <div class="content-wrapper" id="contentWrapper">
+    <h1>You & Me</h1>
 
-  <div class="photo">
-    <img src="foto-romantis.jpg" alt="Foto Asep dan Jahra" />
-  </div>
+    <div class="photo">
+      <img src="foto-romantis.jpg" alt="Foto Asep dan Jahra" />
+    </div>
 
-  <div class="love-message">
-    <p>
-      Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br><br>
-      Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku, dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
-      Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
-    </p>
+    <div class="love-message">
+      <p>
+        Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br><br>
+        Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku, dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
+        Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
+      </p>
+    </div>
+
+    <div class="blur-overlay" id="blurOverlay"></div>
   </div>
 
   <button class="play-button" id="playBtn" onclick="playMusic()">TERIMA KASIH ❤️</button>
@@ -201,7 +210,7 @@
       audio.play();
       blur.classList.add('hidden');
 
-      // Sembunyikan tombol setelah ditekan supaya tidak bisa ditekan lagi
+      // Sembunyikan tombol setelah ditekan
       const btn = document.getElementById('playBtn');
       btn.style.display = 'none';
     }
