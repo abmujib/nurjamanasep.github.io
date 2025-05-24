@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Asep & Zahra</title>
+  <title>You & Me</title>
   <style>
     body {
       margin: 0;
@@ -12,24 +12,43 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     h1 {
-      margin-top: 50px;
+      margin-top: 30px;
       font-size: 3em;
       animation: fadeIn 2s ease-in-out;
     }
 
     .love-message {
-      margin: 30px auto;
+      margin: 20px auto;
       padding: 20px;
-      width: 80%;
+      width: 90%;
       max-width: 600px;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.15);
       border-radius: 20px;
       font-size: 1.2em;
       animation: fadeIn 4s ease-in-out;
+      backdrop-filter: blur(5px);
+    }
+
+    .photo {
+      margin: 20px auto;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .photo img {
+      width: 100%;
+      display: block;
+    }
+
+    audio {
+      display: none;
     }
 
     @keyframes fadeIn {
@@ -81,34 +100,47 @@
         opacity: 0;
       }
     }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2em; }
+      .love-message { font-size: 1em; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="hearts">
-    <!-- Generate some hearts -->
-    <script>
-      for(let i = 0; i < 30; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.top = Math.random() * -100 + 'vh';
-        heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        document.querySelector('.hearts').appendChild(heart);
-      }
-    </script>
+  <audio autoplay loop>
+    <source src="musik-romantis.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="hearts"></div>
+
+  <h1>You & Me</h1>
+
+  <div class="photo">
+    <img src="foto-romantis.jpg" alt="Foto Asep dan Zahra" />
   </div>
 
-  <h1>Asep & Jahra</h1>
   <div class="love-message">
     <p>
-      Untuk Zahra yang paling Asep sayang,<br><br>
-      Terima kasih telah hadir dalam hidupku.<br>
-      Setiap senyumanmu adalah cahaya di hatiku,<br>
-      dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
-      Aku mencintaimu, hari ini, esok, dan selamanya.
+      Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br>
+      Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku,dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
+      Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
     </p>
   </div>
+
+  <script>
+    // Hati animasi
+    for(let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * -100 + 'vh';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.querySelector('.hearts').appendChild(heart);
+    }
+  </script>
 
 </body>
 </html>
