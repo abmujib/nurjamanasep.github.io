@@ -109,7 +109,8 @@
 </head>
 <body>
 
-  <audio autoplay loop>
+  <!-- Musik autoplay dengan muted -->
+  <audio id="romanticMusic" autoplay muted loop>
     <source src="musik-romantis.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
@@ -125,13 +126,13 @@
   <div class="love-message">
     <p>
       Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br><br>
-      Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku,dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
+      Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku, dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
       Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
     </p>
   </div>
 
   <script>
-    // Hati animasi
+    // Animasi hati
     for(let i = 0; i < 30; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
@@ -140,6 +141,13 @@
       heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
       document.querySelector('.hearts').appendChild(heart);
     }
+
+    // Trigger untuk unmute audio saat klik pertama
+    const music = document.getElementById("romanticMusic");
+    window.addEventListener('click', function () {
+      music.muted = false;
+      music.play();
+    }, { once: true });
   </script>
 
 </body>
