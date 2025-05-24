@@ -2,41 +2,48 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>You & Me</title>
+  <meta property="og:title" content="Terimakasih ❤️">
+  <meta property="og:description" content="Terima kasih sudah bertahan sampai kini, meski tak banyak yang bisa ku beri.">
+  <meta property="og:image" content="https://nurjamanasep.github.io/foto-romantis.jpg">
+  <meta property="og:type" content="website">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to bottom right, #ffb6c1, #dda0dd);
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      overflow-x: hidden;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
       text-align: center;
-    }
-
-    /* Container utama berisi konten yang nanti di-blur */
-    .content-wrapper {
-      position: relative;
-      width: 90%;
-      max-width: 700px;
-      z-index: 1;
+      overflow-x: hidden;
     }
 
     h1 {
+      margin-top: 30px;
       font-size: 3em;
-      margin: 0 0 20px;
       animation: fadeIn 2s ease-in-out;
     }
 
+    .love-message {
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      font-size: 1.2em;
+      animation: fadeIn 4s ease-in-out;
+      backdrop-filter: blur(5px);
+    }
+
     .photo {
-      margin: 0 auto 20px;
+      margin: 20px auto;
+      width: 90%;
       max-width: 400px;
       border-radius: 20px;
       overflow: hidden;
@@ -46,70 +53,15 @@
     .photo img {
       width: 100%;
       display: block;
-      border-radius: 20px;
     }
 
-    .love-message {
-      background-color: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 20px;
-      font-size: 1.2em;
-      animation: fadeIn 4s ease-in-out;
-      backdrop-filter: blur(5px);
-      color: white;
-      user-select: none;
-    }
-
-    /* Blur overlay yang menutupi seluruh konten .content-wrapper */
-    .blur-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 182, 193, 0.3);
-      z-index: 10;
-      transition: opacity 0.5s ease;
-    }
-
-    .blur-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Tombol play fixed di tengah layar di atas blur */
-    .play-button {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      color: #e91e63;
-      border: none;
-      padding: 18px 40px;
-      border-radius: 50px;
-      font-size: 1.4em;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      z-index: 20;
-      user-select: none;
-    }
-
-    .play-button:hover {
-      background-color: #f8bbd0;
-      color: white;
-    }
-
-    /* Animasi hati di belakang */
     .hearts {
       position: fixed;
       width: 100%;
       height: 100%;
       top: 0; left: 0;
       pointer-events: none;
-      z-index: 0;
+      z-index: -1;
     }
 
     .heart {
@@ -120,7 +72,6 @@
       transform: rotate(45deg);
       animation: fall 10s linear infinite;
       opacity: 0.6;
-      border-radius: 3px;
     }
 
     .heart::before, .heart::after {
@@ -154,13 +105,49 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .blur-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 182, 193, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .blur-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .unblur-button {
+      background-color: white;
+      color: #e91e63;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 10;
+      position: relative;
+    }
+
+    .unblur-button:hover {
+      background-color: #f8bbd0;
+      color: white;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 2.2em; }
       .love-message { font-size: 1em; }
-      .play-button {
-        font-size: 1.1em;
-        padding: 14px 30px;
-      }
+      .unblur-button { font-size: 1em; padding: 12px 24px; }
     }
   </style>
 </head>
@@ -168,34 +155,31 @@
 
   <div class="hearts"></div>
 
-  <div class="content-wrapper" id="contentWrapper">
-    <h1>You & Me</h1>
-
-    <div class="photo">
-      <img src="foto-romantis.jpg" alt="Foto Asep dan Jahra" />
-    </div>
-
-    <div class="love-message">
-      <p>
-        Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br><br>
-        Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku, dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
-        Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
-      </p>
-    </div>
-
-    <div class="blur-overlay" id="blurOverlay"></div>
+  <div class="blur-overlay" id="blurOverlay">
+    <button class="unblur-button" onclick="playMusic()">TERIMA KASIH ❤️</button>
   </div>
 
-  <button class="play-button" id="playBtn" onclick="playMusic()">TERIMA KASIH ❤️</button>
+  <h1>You & Me</h1>
+
+  <div class="photo">
+    <img src="foto-romantis.jpg" alt="Foto Romantis" />
+  </div>
+
+  <div class="love-message">
+    <p>
+      Seperti senja yang merangkul bumi menuju malam, matamu adalah rumah paling menenangkan. Tak perlu kata, tak perlu tanya, cukup tatap, dan semua akan baik-baik saja.<br><br>
+      Terima kasih telah hadir dalam hidupku, setiap senyumanmu adalah cahaya di hatiku, dan setiap detik bersamamu adalah anugerah yang tak ternilai.<br><br>
+      Aku mencintaimu Zahra, hari ini, esok, dan selamanya.
+    </p>
+  </div>
 
   <audio id="romanticMusic">
-    <source src="https://steksa.net/musik-romantis.mp3" type="audio/mpeg" />
+    <source src="https://steksa.net/musik-romantis.mp3" type="audio/mpeg">
     Browsermu tidak mendukung audio.
   </audio>
 
   <script>
-    // Animasi hati
-    for(let i = 0; i < 30; i++) {
+    for (let i = 0; i < 30; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
       heart.style.left = Math.random() * 100 + 'vw';
@@ -205,14 +189,10 @@
     }
 
     function playMusic() {
-      const audio = document.getElementById('romanticMusic');
-      const blur = document.getElementById('blurOverlay');
+      const audio = document.getElementById("romanticMusic");
+      const blur = document.getElementById("blurOverlay");
       audio.play();
       blur.classList.add('hidden');
-
-      // Sembunyikan tombol setelah ditekan
-      const btn = document.getElementById('playBtn');
-      btn.style.display = 'none';
     }
   </script>
 
